@@ -7,16 +7,24 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
+    "axios": "^0.20.0",
     "core-js": "^3.6.5",
+    "dayjs": "^1.8.34",
+    "lodash": "^4.17.20",
+    "vant": "^2.10.3",
     "vue": "^2.6.11",
-    "vue-router": "^3.2.0"
+    "vue-router": "^3.2.0",
+    "weixin-js-sdk": "^1.6.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-plugin-router": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
+    "babel-plugin-import": "^1.13.0",
     "less": "^3.0.4",
     "less-loader": "^5.0.0",
+    "postcss": "^7.0.32",
+    "postcss-px-to-viewport": "^1.1.1",
     "vue-template-compiler": "^2.6.11"
   },
   "browserslist": [

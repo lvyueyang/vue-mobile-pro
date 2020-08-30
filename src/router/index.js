@@ -1,27 +1,39 @@
 import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import Router from 'vue-router'
+import util from '@/utils'
 
-Vue.use(VueRouter)
+Vue.use(Router)
 
-  const routes = [
-  {
-    path: '/',
-    name: 'Home',
-    component: Home
-  },
-  {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+import Home from '../views/home/index.vue'
+
+let router = new Router({
+  routes: [
+    {
+      path: '/',
+      name: 'index',
+      meta: {
+      },
+      component: Home
+    }
+  ],
+  scrollBehavior(to, from, savedPosition) {
+    // 从第二页返回首页时savedPosition为undefined
+    if (savedPosition || typeof savedPosition === 'undefined') {
+      // 只处理设置了路由元信息的组件
+      from.meta.isKeepAlive = typeof from.meta.isKeepAlive === 'undefined' ? undefined : false
+      to.meta.isKeepAlive = typeof to.meta.isKeepAlive === 'undefined' ? undefined : true
+      if (savedPosition) {
+        return savedPosition
+      }
+    } else {
+      from.meta.isKeepAlive = typeof from.meta.isKeepAlive === 'undefined' ? undefined : true
+      to.meta.isKeepAlive = typeof to.meta.isKeepAlive === 'undefined' ? undefined : false
+    }
   }
-]
-
-const router = new VueRouter({
-  routes
 })
 
+// 后置
+router.afterEach((to) => {
+  util.setTitle(to.meta.title)
+})
 export default router
